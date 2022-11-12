@@ -4,19 +4,21 @@ const path = require('path')
 const cors = require('cors');
 const userRoutes = require("./routes/userRoutes");
 const foyerRoutes = require('./routes/foyerRoutes')
+const bookingRoutes = require('./routes/bookingRoutes')
 require('dotenv').config({path:"./BACK/.env"});
 const mongoose = require('mongoose');
 const { logger } = require('./middlewares/logger');
 const app = express();
 const port =5005;
 const errorHandler = require('./middlewares/errorHandler')
-app.use(logger)
+
 //connect database 
 connectDB();
 app.use(express.json());
 
 app.use("/api/users", userRoutes);
 app.use("/api/foyers",foyerRoutes);
+app.use("/api/bookings",bookingRoutes);
 
 
 

@@ -23,5 +23,24 @@ passport.use(
     ).select('-password');
   })
 );
+// passport.use(
+//   new JwtStrategy(opts, function (jwt_payload, done) {
+//     Foyer.findOne({ _id: jwt_payload.id }, function (err, foyer) {
+//       if (err) {
+//         return done(err, false);
+//       }
+//       if (foyer) {
+//         return done(null, foyer);
+//       } else {
+//         return done(null, false);
+//         // or you could create a new account
+//       }
+//     }
+//     ).select('-password');
+//   })
+// );
+
+//foyerid
+
 module.exports = isAuth = () =>
   passport.authenticate("jwt", { session: false });

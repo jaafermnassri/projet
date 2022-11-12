@@ -17,7 +17,7 @@ user: { type: mongoose.Schema.Types.ObjectId, ref: "user",required:true },
         type:Boolean,
         default:true,
     },
-    students:["User"],
+    booking:{type: mongoose.Schema.Types.ObjectId, ref: 'Booking'},
     maxCapacity:Number
 });
 module.exports = Foyer = mongoose.model("foyer", foyerSchema);

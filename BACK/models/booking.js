@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema({
-    BirthDate: {type: Date, required:true},
+    BirthDate: {type: String, required:true},
     University: {
         type: String,
         default: "",

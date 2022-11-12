@@ -42,6 +42,13 @@ router.post('/login',async (req,res)=>{
     }
 })
 
+
+//get current user
+router.get("/current", isAuth(), async (req, res) => {
+    res.send(req.user);
+  });
+
+
 router.get('/', async (req,res)=>{
     try {
         const users = await User.find({})
@@ -51,6 +58,7 @@ router.get('/', async (req,res)=>{
         console.log(error)
     }
 });
+
 
 //delete users
 router.delete("/:idDelete",async (req,res)=>{
