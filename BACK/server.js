@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require("./Config/connectDB");
 const path = require('path')
 const cors = require('cors');
+
 const userRoutes = require("./routes/userRoutes");
 const foyerRoutes = require('./routes/foyerRoutes')
 const bookingRoutes = require('./routes/bookingRoutes')
@@ -15,6 +16,8 @@ const errorHandler = require('./middlewares/errorHandler')
 //connect database 
 connectDB();
 app.use(express.json());
+app.use(cors());
+
 
 app.use("/api/users", userRoutes);
 app.use("/api/foyers",foyerRoutes);
@@ -37,7 +40,7 @@ app.use("/api/bookings",bookingRoutes);
 // })
 
 
-app.use(cors());
+
 
 app.use(errorHandler)
 app.listen(port, () => {

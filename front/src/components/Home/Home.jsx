@@ -1,8 +1,11 @@
 import React from 'react'
+import DormList from '../DormList/DormList'
 
 const Home = () => {
   return (
-    <div>Home Page</div>
+    <div>
+      <DormList/>
+    </div>
   )
 }
 

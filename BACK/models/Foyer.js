@@ -11,7 +11,7 @@ const foyerSchema = new mongoose.Schema({
     default:"male",
     enum: ["male",'female']
   },
-  
+  phone:Number,
 user: { type: mongoose.Schema.Types.ObjectId, ref: "user",required:true },
     open:{
         type:Boolean,

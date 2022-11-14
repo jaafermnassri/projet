@@ -1,4 +1,4 @@
-import { GET_CURRENT_USER_SUCCESS, LOGIN_SUCCESS, LOGOUT, REGISTRE_SUCCESS } from "../consts/userConsts";
+import { GET_CURRENT_USER_SUCCESS, LOGIN_SUCCESS, LOGOUT } from "../consts/userConsts";
 
 
 const initialstate = {load:false,user:{},errors:null} 
