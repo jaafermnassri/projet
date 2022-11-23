@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const User = require("../models/User");
 const foyerSchema = new mongoose.Schema({
-    Name: { type: String, required: true, uppercase: true, trim: true }, 
-    Adresse: { type: String, required: true, uppercase: true, trim: true }, 
+    fullname: { type: String, required: true, uppercase: true, trim: true }, 
+    adresse: { type: String, required: true, uppercase: true, trim: true }, 
     image: { type: String },
     createdOn: { type: Date, default: Date.now },
     description: { type: String, trim: true },

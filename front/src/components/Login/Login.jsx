@@ -1,7 +1,7 @@
 import React from 'react'
 import { login } from '../../Redux/actions/userActions'
 import { useDispatch } from "react-redux";
-import {Link as LinkR, useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 const Login = () => {
     const dispatch = useDispatch();
      const navigate = useNavigate();
@@ -25,7 +25,8 @@ const Login = () => {
             <div className="text-center">
               Not registered yet?{" "}
               <span className="link-primary" /*link to register*/>
-                Sign Up
+                
+                <Link to="/register">Sign Up</Link>
               </span>
             </div>
             <div className="form-group mt-3">

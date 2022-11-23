@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from './Redux/actions/userActions';
 import { getAllFoyers } from './Redux/actions/foyerActions';
+import DormDetail from './components/DormDetail/DormDetail';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/addDorm" element={<PrivateUser><AddDorm /></PrivateUser>} />
+        <Route path="/:id" element={<DormDetail />} />
       </Routes>
     </div>
   );

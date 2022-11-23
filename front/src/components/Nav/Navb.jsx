@@ -3,13 +3,23 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../Redux/actions/userActions';
 import "./Navb.css"
 function Navb() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const inout = (event)=>{
+  //   event.preventDefault();
+  //   localStorage.getItem("token") ? 
+  // (<div onClick={() => {dispatch(logout());navigate("/login", { replace: true });}}>Logout</div>) : 
+  // (<Link to="/login">Login</Link>);}
+    
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">DormsNet</Navbar.Brand>
+        <Navbar.Brand ><Link to="/">DormsNet</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -26,8 +36,10 @@ function Navb() {
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                <Link to="/register">Login / SignUp</Link>
+              <NavDropdown.Item  >
+              {localStorage.getItem("token")} ? 
+  <><div onClick={() => {dispatch(logout());navigate("/login", { replace: true });}}>Logout</div></> :<> <Link to="/login">Login</Link></>
+                {/* <Link to="/register">Login / SignUp</Link>  */}
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

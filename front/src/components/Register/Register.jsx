@@ -1,7 +1,7 @@
 
 import React from "react"
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../Redux/actions/userActions";
 import "./register.css"
 export default function Register() {
@@ -40,7 +40,8 @@ export default function Register() {
           <div className="text-center">
             Already registered?{" "}
             <span className="link-primary" /*link to login page*/ >
-              Sign In
+              
+           <Link to="/login">Sign In</Link>   
             </span>
           </div>
           <div className="form-group mt-3">

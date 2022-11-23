@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
+import React from "react";
 import { MDBCard, MDBCardBody, MDBCardHeader, MDBCheckbox, MDBCol, MDBInput, MDBRow, MDBTextArea, MDBTypography } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -7,8 +8,8 @@ const AddDorm = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [Name, setName] = React.useState("");
-  const [adresse, setAdresse] = React.useState("");
+  const [fullname, setFullname] = useState("");
+  const [adresse, setAdresse] = useState("");
   const [gender, setGender] = useState("")
   const [description, setDescription] = useState("");
 
@@ -17,14 +18,19 @@ const AddDorm = () => {
 
     const data = new FormData();
     
-    data.append("Name",Name);
-    data.append("Adresse", adresse);
+    data.append("fullname",fullname);
+    data.append("adresse", adresse);
     data.append("gender",gender)
     data.append("description",description)
-    dispatch(addFoyer(data,navigate));
+    dispatch(addFoyer({
+      fullname : data.get("fullname"),
+      adresse : data.get("adresse")
+    },navigate));
   };
 
 
+
+  
   return (
     <div className="mx-auto mt-5" style={{ maxWidth: '900px' }}>
       <MDBRow>
@@ -34,13 +40,14 @@ const AddDorm = () => {
               <MDBTypography tag="h5" className="mb-0">Complete your Dorm infos creating</MDBTypography>
             </MDBCardHeader>
             <MDBCardBody>
-              <form method='post' onSubmit={handleSubmit}>
+              <form method="POST" onSubmit={handleSubmit}>
                 <MDBRow className="mb-4">
                   <MDBCol>
                     Name
-                    <MDBInput name="Name" type='text' onChange={(e) => {
-                    setName(e.target.value);
+                    <MDBInput name="fullname" type='text' onChange={(e) => {
+                    setFullname(e.target.value);
                   }} />
+                  
                   </MDBCol>
                   <MDBCol>
                     Gender
@@ -49,7 +56,7 @@ const AddDorm = () => {
                 </MDBRow>
 
                 Capacity<MDBInput  label='' type='text' className="mb-4" />
-                Address<MDBInput name="adresse"  onChange={(e) => {
+                Adresse<MDBInput name="adresse" onChange={(e) => {
                     setAdresse(e.target.value);
                   }} label='' type='text' className="mb-4" />
                 Email<MDBInput label='' type='text' className="mb-4" />
@@ -69,9 +76,10 @@ const AddDorm = () => {
           </MDBCard>
           
         </MDBCol>
-        
+       
       </MDBRow>
     </div>
+
   )
 }
 

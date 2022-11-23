@@ -27,7 +27,6 @@ import {
         };
       case GET_ALL_FOYERS_FAIL:
         return { ...state, errors: payload, loading: false };
-  
       case DELETE_FOYER_FAIL:
         return { ...state, errors: payload, loading: false };
   
