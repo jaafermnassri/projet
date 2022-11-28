@@ -86,6 +86,8 @@ export const editFoyer = (id,editedFoyer, navigate) => async (dispatch) => {
     console.log(error);
   }
 };
+
+//get all foyers
 export const getAllFoyers = () => async (dispatch) => {
   dispatch({ type: GET_ALL_FOYERS_LOADING });
   try {

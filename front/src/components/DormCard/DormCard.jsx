@@ -19,6 +19,7 @@ export default function DormCard({dorm}) {
           Some quick example text to build on the card title and make up the bulk of the card's content.
         </MDBCardText>
         <MDBBtn ><Link to={`/${dorm._id}`}>Details</Link></MDBBtn>
+        {/* <MDBBtn ><Link to={`/book/${dorm._id}`}>Book Now</Link></MDBBtn> */}
       </MDBCardBody>
     </MDBCard>
   );

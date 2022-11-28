@@ -24,9 +24,9 @@ const EditDorm = () => {
     
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    // const data = new FormData(event.currentTarget);
     
-    dispatch((editFoyer(id, updatedDorm, navigate)));
+    dispatch(editFoyer(id,updatedDorm,navigate));
   };
     return (
       <>
@@ -40,7 +40,7 @@ const EditDorm = () => {
                 <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
               </MDBModalHeader>
               <MDBModalBody>
-                <form method='POST' onSubmit={handleSubmit} >
+                <form method='POST' >
               Fullname<MDBInput name="fullname" value={updatedDorm.fullname} onChange={(e)=>setUpdatedDorm({...updatedDorm,fullname:e.target.value})}  label='' type='text' className="mb-4" />
                 Adresse<MDBInput name="adresse" value={updatedDorm.adresse} onChange={(e)=>setUpdatedDorm({...updatedDorm,adresse:e.target.value})}  label='' type='text' className="mb-4" />
                 Email<MDBInput label='' type='text' className="mb-4" />
@@ -53,7 +53,7 @@ const EditDorm = () => {
                 <MDBBtn color='secondary' onClick={toggleShow}>
                   Close
                 </MDBBtn>
-                <MDBBtn type="submit" onClick={toggleShow}>Save</MDBBtn>
+                <MDBBtn type="submit" onClick={(e)=>{toggleShow();handleSubmit(e)}}>Save</MDBBtn>
               </MDBModalFooter>
             </MDBModalContent>
           </MDBModalDialog>

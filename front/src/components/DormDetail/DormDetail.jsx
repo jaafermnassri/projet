@@ -3,6 +3,7 @@ import { deleteFoyer, detailsFoyer } from '../../Redux/actions/foyerActions';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import EditDorm from '../EditDorm/EditDorm';
+import BookDorm from '../BookDorm/BookDorm';
 
 const DormDetail = ({foyer}) => {
   
@@ -14,6 +15,7 @@ const {id} = useParams()
   }, [])
   return (
     <div>DormDetail
+        <BookDorm />
         <EditDorm/>
         <button onClick={() => dispatch(deleteFoyer(id))} ><Link to="/">delete</Link></button> 
         <h1>{oneFoyer.fullname}</h1>

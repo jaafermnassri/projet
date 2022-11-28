@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema({
-    BirthDate: {type: String, required:true},
-    University: {
+    birthDate: {type: String, required:true},
+    university: {
         type: String,
         default: "",
         enum: ["ISSAT",'ISET', "IPEI"],

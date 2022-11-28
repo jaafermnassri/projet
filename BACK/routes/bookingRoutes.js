@@ -9,7 +9,7 @@ const Foyer = require('../models/Foyer')
 router.post('/:idFoyer',isAuth(), async (req,res)=>{
     try {
         const newBooking = new Booking({...req.body,user:req.user._id})
-        const bookedFoyer = await Foyer.findOne({_id:req.params.idFoyer}).populate("Name","Adresse") // ,user:req.user._id,foyer:req.foyer._id
+        const bookedFoyer = await Foyer.findOne({_id:req.params.idFoyer}).populate("fullname","adresse") // ,user:req.user._id,foyer:req.foyer._id
         await newBooking.save()
         res.send({...newBooking,bookedFoyer})
     } catch (error) {

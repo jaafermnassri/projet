@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { getCurrentUser } from './Redux/actions/userActions';
 import { getAllFoyers } from './Redux/actions/foyerActions';
 import DormDetail from './components/DormDetail/DormDetail';
+import BookDorm from './components/BookDorm/BookDorm';
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/addDorm" element={<PrivateUser><AddDorm /></PrivateUser>} />
         <Route path="/:id" element={<DormDetail />} />
+        {/* <Route path="/book/:id" element={<BookDorm />} /> */}
       </Routes>
     </div>
   );
