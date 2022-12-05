@@ -1,6 +1,6 @@
 import { MDBBtn, MDBInput, MDBModal, MDBModalBody, MDBModalContent, MDBModalDialog, MDBModalFooter, MDBModalHeader, MDBModalTitle, MDBTextArea } from 'mdb-react-ui-kit'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { addBook } from '../../Redux/actions/bookingActions';
 import { detailsFoyer } from '../../Redux/actions/foyerActions';
@@ -10,7 +10,8 @@ const BookDorm = () => {
   const [staticModal, setStaticModal] = useState(false);
 
   const toggleShow = () => setStaticModal(!staticModal);
-
+  const capacity = useSelector((state)=> state.foyerReducer.oneFoyer.maxCapacity);
+  
   const {id} = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -26,13 +27,14 @@ const BookDorm = () => {
     
     data.append("university",university);
     data.append("birthDate", birthDate);
+
     dispatch(addBook(id,{
       university : data.get("university"),
       birthDate : data.get("birthDate")
-    },navigate));
-    console.log("booked succefully");
-  };
+    } ,navigate));
+    
 
+  };
 
   return (
     <div>
@@ -62,7 +64,7 @@ const BookDorm = () => {
           <MDBBtn color='secondary' onClick={toggleShow}>
             Close
           </MDBBtn>
-          <MDBBtn type="submit" onClick={(e)=>{toggleShow();handleSubmit(e)}}>Save</MDBBtn>
+          <MDBBtn type="submit"  onClick={(e)=>{toggleShow();handleSubmit(e);alert("Booked Successfully")}}>Save</MDBBtn>
         </MDBModalFooter>
       </MDBModalContent>
     </MDBModalDialog>

@@ -1,20 +1,21 @@
 const express = require('express');
 const connectDB = require("./Config/connectDB");
-const path = require('path')
+// const path = require('path')
 const cors = require('cors');
 
 const userRoutes = require("./routes/userRoutes");
 const foyerRoutes = require('./routes/foyerRoutes')
 const bookingRoutes = require('./routes/bookingRoutes')
-require('dotenv').config({path:"./BACK/.env"});
+require('dotenv').config();
 const mongoose = require('mongoose');
-const { logger } = require('./middlewares/logger');
+// const { logger } = require('./middlewares/logger');
 const app = express();
 const port =5005;
-const errorHandler = require('./middlewares/errorHandler')
+// const errorHandler = require('./middlewares/errorHandler')
 
 //connect database 
 connectDB();
+app.use("/uploads",express.static(__dirname+"/uploads"))
 app.use(express.json());
 app.use(cors());
 
@@ -42,7 +43,7 @@ app.use("/api/bookings",bookingRoutes);
 
 
 
-app.use(errorHandler)
+// app.use(errorHandler)
 app.listen(port, () => {
 console.log(`Server is running on port: ${port}`);
 });

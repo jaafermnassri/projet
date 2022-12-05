@@ -1,9 +1,11 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 import {NEW_BOOKING_SUCCESS,NEW_BOOKING_FAIL,GET_BOOKING_SUCCESS,GET_BOOKING_FAIL,GET_BOOKING_LOADING} from "../consts/bookingConsts"
 
 
 //create a booking
 export const addBook = (id,newBook,navigate) => async (dispatch) => {
+  
     const token = localStorage.getItem("token");
     try {
       const res = await axios.post(
@@ -18,6 +20,7 @@ export const addBook = (id,newBook,navigate) => async (dispatch) => {
       
       dispatch({ type: NEW_BOOKING_SUCCESS, payload: res.data });
     //   dispatch(getAllFoyers());
+  
       navigate(`/`);
     } catch (error) {
       dispatch({ type: NEW_BOOKING_FAIL, payload: error });

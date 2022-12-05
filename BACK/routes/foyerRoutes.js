@@ -3,14 +3,21 @@ const router = express.Router()
 const Foyer = require('../models/Foyer')
 const isAuth = require('../middlewares/isAuth')
 const isOwner = require('../middlewares/isOwner')
-
+const upload = require('../utils/multer')
+//----------------
 //get all foyers
 router.get("/", async (req, res) => {
     // console.log(req.query.Name)
-    const foyers = await Foyer.find({});
-    res.send(foyers);
+    try {
+        const foyers = await Foyer.find({});
+        res.send(foyers);
+    } catch (error) {
+        res.status(400).send(error.message);
+            console.log(error);
+    }
+    
 });
-
+//-----------
 // delete foyer 
 router.delete("/:idDelete",isAuth(),async (req,res)=>{
     if(req.user.role === 'director'){
@@ -25,13 +32,19 @@ router.delete("/:idDelete",isAuth(),async (req,res)=>{
     else{res.status(401).send({msg:"Only directors are allowed"});}
 })
 
-
+//----------
 //add foyer 
-router.post('/add',isAuth(), async (req,res)=>{
+router.post('/add',upload("dorms").single("fileName"),isAuth(), async (req,res)=>{
+    console.log("file", req.file);
+    const url = `${req.protocol}://${req.get("host")}`;
     if(req.user.role === 'director'){
+        
+        
         try {
             const newFoyer = new Foyer({...req.body,user: req.user._id});
-            await newFoyer.save()
+            newFoyer.image = `${url}/${req.file.path}`;
+            
+            await newFoyer.save();
             res.send(newFoyer);
         } catch (error) {
             res.status(400).send(error.message);
@@ -42,10 +55,7 @@ router.post('/add',isAuth(), async (req,res)=>{
    
 })
 
- 
-
-
-
+//-------------
 //update foyer 
 router.put('/:idUpdate',isAuth(),async (req,res)=>{
     if(req.user.role === 'director'){
@@ -61,7 +71,7 @@ router.put('/:idUpdate',isAuth(),async (req,res)=>{
     else{res.status(401).send({msg:"Only directors are allowed"});}
 })
 
-
+//--------------
 //get One FOYER
 router.get("/:id", async (req, res) => {
     try {
@@ -72,4 +82,8 @@ router.get("/:id", async (req, res) => {
       console.log(error);
     }
   });
+
+  //------------
+  //get foyer by name
+
 module.exports = router;

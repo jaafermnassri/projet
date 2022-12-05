@@ -1,36 +1,25 @@
-import React, { useEffect } from 'react'
-import { deleteFoyer, detailsFoyer } from '../../Redux/actions/foyerActions';
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import EditDorm from '../EditDorm/EditDorm';
-import BookDorm from '../BookDorm/BookDorm';
-import ForStudent from '../private/ForStudent';
-import ForDirector from '../private/ForDirector';
+import React from 'react'
+import { useSelector } from 'react-redux'
 import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
-  MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem
-} from 'mdb-react-ui-kit';
-const DormDetail = ({foyer}) => {
-  
-    const oneFoyer = useSelector((state)=> state.foyerReducer.oneFoyer);
-const {id} = useParams()
-  const dispatch = useDispatch();
- useEffect(() => {
-    dispatch(detailsFoyer(id)) 
-  }, [])
+    MDBCol,
+    MDBContainer,
+    MDBRow,
+    MDBCard,
+    MDBCardText,
+    MDBCardBody,
+    MDBCardImage,
+    MDBBtn,
+    MDBBreadcrumb,
+    MDBBreadcrumbItem,
+    MDBProgress,
+    MDBProgressBar,
+    MDBIcon,
+    MDBListGroup,
+    MDBListGroupItem
+  } from 'mdb-react-ui-kit';
+import EditUser from '../EditUser/EditUser';
+const UserDetail = () => {
+    const userinfo = useSelector((state)=>state.userReducer.user)
   return (
     <div>
         
@@ -55,7 +44,7 @@ const {id} = useParams()
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
                 <MDBCardImage
-                  src="https://static.vecteezy.com/system/resources/previews/007/241/795/original/easy-to-use-flat-icon-of-building-vector.jpg"
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                   alt="avatar"
                   className="rounded-circle"
                   style={{ width: '150px' }}
@@ -63,11 +52,8 @@ const {id} = useParams()
                 <p className="text-muted mb-1">Full Stack Developer</p>
                 <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
                 <div className="d-flex justify-content-center mb-2">
-                <ForDirector>
-        <EditDorm/>
-        <MDBBtn onClick={() => dispatch(deleteFoyer(id))} ><Link to="/">delete</Link></MDBBtn> 
-        </ForDirector>
-        <ForStudent><BookDorm /></ForStudent>
+                  <EditUser/>
+                  <MDBBtn outline className="ms-1">Message</MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -107,7 +93,7 @@ const {id} = useParams()
                     <MDBCardText>Fullname</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{oneFoyer.fullname}</MDBCardText>
+                    <MDBCardText className="text-muted">{userinfo.firstName} {userinfo.lastName}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -131,10 +117,10 @@ const {id} = useParams()
                 <hr />
                 <MDBRow>
                   <MDBCol sm="3">
-                    <MDBCardText>Available Rooms</MDBCardText>
+                    <MDBCardText>Mobile</MDBCardText>
                   </MDBCol>
                   <MDBCol sm="9">
-                    <MDBCardText className="text-muted">{oneFoyer.maxCapacity}</MDBCardText>
+                    <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
@@ -222,4 +208,4 @@ const {id} = useParams()
   )
 }
 
-export default DormDetail
+export default UserDetail

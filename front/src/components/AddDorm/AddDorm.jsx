@@ -8,23 +8,27 @@ const AddDorm = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [image, setImage] = useState("");
   const [fullname, setFullname] = useState("");
   const [adresse, setAdresse] = useState("");
   const [gender, setGender] = useState("")
   const [description, setDescription] = useState("");
-
+  const [maxCapacity, setMaxCapacity] = useState(0);
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const data = new FormData();
-    
+    data.append("fileName", image);
     data.append("fullname",fullname);
     data.append("adresse", adresse);
     data.append("gender",gender)
     data.append("description",description)
+    data.append("maxCapacity",maxCapacity)
     dispatch(addFoyer({
+      image : data.get("fileName"),
       fullname : data.get("fullname"),
-      adresse : data.get("adresse")
+      adresse : data.get("adresse"),
+      maxCapacity : data.get("maxCapacity")
     },navigate));
   };
 
@@ -44,23 +48,17 @@ const AddDorm = () => {
                 <MDBRow className="mb-4">
                   <MDBCol>
                     Name
-                    <MDBInput name="fullname" type='text' onChange={(e) => {
-                    setFullname(e.target.value);
-                  }} />
-                  
+                    <MDBInput name="fullname" type='text' onChange={(e) => {setFullname(e.target.value);}} />
                   </MDBCol>
                   <MDBCol>
                     Gender
                     <MDBInput name="gender" type='text' />
                   </MDBCol>
                 </MDBRow>
-
-                Capacity<MDBInput  label='' type='text' className="mb-4" />
-                Adresse<MDBInput name="adresse" onChange={(e) => {
-                    setAdresse(e.target.value);
-                  }} label='' type='text' className="mb-4" />
+                Available Rooms<MDBInput name="maxCapacity" label='' type='number' onChange={(e) => {setMaxCapacity(e.target.value);}} className="mb-4" />
+                Adresse<MDBInput name="adresse" onChange={(e) => {setAdresse(e.target.value);}} label='' type='text' className="mb-4" />
                 Email<MDBInput label='' type='text' className="mb-4" />
-                Phone<MDBInput label='' type='text' className="mb-4" />
+                Image<MDBInput name="fileName" onChange={(e) => {setImage(e.target.files[0]);}} label='' type='file' className="mb-4" />
                 Additional information<MDBTextArea label='' rows={4} className="mb-4" />
 
                 <div className="d-flex justify-content-center">

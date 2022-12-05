@@ -48,7 +48,7 @@ router.get("/current", isAuth(), async (req, res) => {
     res.send(req.user);
   });
 
-
+//get all users
 router.get('/', async (req,res)=>{
     try {
         const users = await User.find({})
@@ -60,8 +60,9 @@ router.get('/', async (req,res)=>{
 });
 
 
-//delete users
-router.delete("/:idDelete",async (req,res)=>{
+//delete user
+router.delete("/:idDelete",isAuth(),async (req,res)=>{
+    if(req.user.role === 'admin'){
     try {
         const deleted = await User.deleteOne({_id:req.params.idDelete});
         (deleted.deletedCount)? res.send({msg:'User deleted successfully'}):res.send({msg:"User is already deleted"})
@@ -69,10 +70,12 @@ router.delete("/:idDelete",async (req,res)=>{
         res.status(400).send(error.message);
         console.log(error);
     }
+}
+    else{res.status(401).send({msg:"Only admins are allowed"});}
 })
 
 // UPDATE USER  
-router.put('/:idUpdate',async (req,res)=>{
+router.put('/:idUpdate',isAuth(),async (req,res)=>{
     try {
         const updating = await User.updateOne({_id:req.params.idUpdate},{...req.body});
         const updated = await User.findOne({_id:req.params.idUpdate}) 
@@ -82,4 +85,16 @@ router.put('/:idUpdate',async (req,res)=>{
         console.log(error); 
     }
 })
+module.exports = router;
+
+//get one user details
+router.get("/:id", async (req, res) => {
+    try {
+      const findOneUser = await User.findOne({ _id: req.params.id });
+      res.send(findOneUser);
+    } catch (error) {
+      res.status(400).send(error.message);
+      console.log(error);
+    }
+  });
 module.exports = router;
