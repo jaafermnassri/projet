@@ -26,12 +26,19 @@ import {
 const DormDetail = ({foyer}) => {
   
     const oneFoyer = useSelector((state)=> state.foyerReducer.oneFoyer);
+    
+    const userid = useSelector((state)=>state.userReducer.user._id)
+    
 const {id} = useParams()
   const dispatch = useDispatch();
  useEffect(() => {
     dispatch(detailsFoyer(id)) 
+    
   }, [])
+  console.log(userid)
+    console.log(oneFoyer.user)
   return (
+    
     <div>
         
         <section style={{ backgroundColor: '#eee' }}>
@@ -64,8 +71,9 @@ const {id} = useParams()
                 <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
                 <div className="d-flex justify-content-center mb-2">
                 <ForDirector>
+                  {userid == oneFoyer.user} ?
         <EditDorm/>
-        <MDBBtn onClick={() => dispatch(deleteFoyer(id))} ><Link to="/">delete</Link></MDBBtn> 
+        <MDBBtn onClick={() => dispatch(deleteFoyer(id))} ><Link to="/">delete</Link></MDBBtn>:null
         </ForDirector>
         <ForStudent><BookDorm /></ForStudent>
                 </div>

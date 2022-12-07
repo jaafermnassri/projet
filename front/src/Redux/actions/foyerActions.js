@@ -89,9 +89,14 @@ export const editFoyer = (id,editedFoyer, navigate) => async (dispatch) => {
 
 //get all foyers
 export const getAllFoyers = () => async (dispatch) => {
+  const token = localStorage.getItem("token");
   dispatch({ type: GET_ALL_FOYERS_LOADING });
   try {
-    const res = await axios.get("http://localhost:5005/api/foyers/");
+    const res = await axios.get("http://localhost:5005/api/foyers/",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     dispatch({ type: GET_ALL_FOYERS_SUCCESS, payload: res.data });
   } catch (error) {
     dispatch({ type: GET_ALL_FOYERS_FAIL, payload: error });

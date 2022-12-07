@@ -11,6 +11,10 @@
 
 .profile-card-6 img {
     transition: all 0.15s linear;
+    max-width: 600px;
+    max-height: 600px;
+    height: 80%;
+    width: 100%;
 }
 
 .profile-card-6 .profile-name {
@@ -54,6 +58,7 @@
 
 .profile-card-6:hover img {
     filter: brightness(80%);
+   
 }
 
 .profile-card-6:hover .profile-name {

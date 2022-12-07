@@ -20,7 +20,7 @@ export const addBook = (id,newBook,navigate) => async (dispatch) => {
       
       dispatch({ type: NEW_BOOKING_SUCCESS, payload: res.data });
     //   dispatch(getAllFoyers());
-  
+    alert("Booked Successfully")
       navigate(`/`);
     } catch (error) {
       dispatch({ type: NEW_BOOKING_FAIL, payload: error });
@@ -33,9 +33,20 @@ export const addBook = (id,newBook,navigate) => async (dispatch) => {
   // get all bookings 
   export const getAllBookings = () => async (dispatch) => {
     dispatch({ type: GET_BOOKING_LOADING });
+    const token = localStorage.getItem("token");
     try {
-      const res = await axios.get("http://localhost:5005/api/bookings/");
+      const res = await axios.get(
+        `http://localhost:5005/api/bookings/`,
+        
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // const res = await axios.get("http://localhost:5005/api/bookings/");
       dispatch({ type: GET_BOOKING_SUCCESS, payload: res.data });
+      
     } catch (error) {
       dispatch({ type: GET_BOOKING_FAIL, payload: error });
     }

@@ -6,8 +6,8 @@ const isOwner = require('../middlewares/isOwner')
 const upload = require('../utils/multer')
 //----------------
 //get all foyers
-router.get("/", async (req, res) => {
-    // console.log(req.query.Name)
+router.get("/",isAuth(), async (req, res) => {
+    
     try {
         const foyers = await Foyer.find({});
         res.send(foyers);
@@ -15,8 +15,21 @@ router.get("/", async (req, res) => {
         res.status(400).send(error.message);
             console.log(error);
     }
+
     
 });
+//SEARCH filter
+//------------
+router.get("/search",async (req, res) => {
+    try {
+        const foyes = await Foyer.find({fullname:{$regex:req.query.fullname},adresse:{$regex:req.query.adresse}}).populate();
+          res.send(foyes);   
+    } catch (error) {
+        res.status(400).send(error.message);
+            console.log(error);
+    }
+    
+  });
 //-----------
 // delete foyer 
 router.delete("/:idDelete",isAuth(),async (req,res)=>{

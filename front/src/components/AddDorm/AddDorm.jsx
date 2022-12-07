@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from "react";
-import { MDBCard, MDBCardBody, MDBCardHeader, MDBCheckbox, MDBCol, MDBInput, MDBRow, MDBTextArea, MDBTypography } from 'mdb-react-ui-kit';
+import { MDBCard, MDBCardBody, MDBCardHeader, MDBCardText, MDBCheckbox, MDBCol, MDBInput, MDBProgress, MDBProgressBar, MDBRow, MDBTextArea, MDBTypography } from 'mdb-react-ui-kit';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addFoyer } from '../../Redux/actions/foyerActions';
@@ -22,14 +22,9 @@ const AddDorm = () => {
     data.append("fullname",fullname);
     data.append("adresse", adresse);
     data.append("gender",gender)
-    data.append("description",description)
+    // data.append("description",description)
     data.append("maxCapacity",maxCapacity)
-    dispatch(addFoyer({
-      image : data.get("fileName"),
-      fullname : data.get("fullname"),
-      adresse : data.get("adresse"),
-      maxCapacity : data.get("maxCapacity")
-    },navigate));
+    dispatch(addFoyer(data,navigate));
   };
 
 
@@ -52,7 +47,7 @@ const AddDorm = () => {
                   </MDBCol>
                   <MDBCol>
                     Gender
-                    <MDBInput name="gender" type='text' />
+                    <MDBInput name="gender" onChange={(e) => {setGender(e.target.value);}} type='text' />
                   </MDBCol>
                 </MDBRow>
                 Available Rooms<MDBInput name="maxCapacity" label='' type='number' onChange={(e) => {setMaxCapacity(e.target.value);}} className="mb-4" />
@@ -74,8 +69,9 @@ const AddDorm = () => {
           </MDBCard>
           
         </MDBCol>
-       
+        
       </MDBRow>
+     
     </div>
 
   )

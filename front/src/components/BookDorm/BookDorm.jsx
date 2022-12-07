@@ -33,6 +33,7 @@ const BookDorm = () => {
       birthDate : data.get("birthDate")
     } ,navigate));
     
+    
 
   };
 
@@ -64,7 +65,7 @@ const BookDorm = () => {
           <MDBBtn color='secondary' onClick={toggleShow}>
             Close
           </MDBBtn>
-          <MDBBtn type="submit"  onClick={(e)=>{toggleShow();handleSubmit(e);alert("Booked Successfully")}}>Save</MDBBtn>
+          <MDBBtn type="submit"  onClick={(e)=>{toggleShow();handleSubmit(e)}} >Save</MDBBtn>
         </MDBModalFooter>
       </MDBModalContent>
     </MDBModalDialog>
